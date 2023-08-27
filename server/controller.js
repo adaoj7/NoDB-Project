@@ -17,7 +17,7 @@ const handlerFunctions = {
     },
     editNat: (req,res) => {
         const {id} = req.params
-        const {owner,addImg} = req.body
+        const {img,origin,owner,addImg} = req.body
 
         const index = NAT_DATA.findIndex(ele => ele.id === +id)
         const nativity = NAT_DATA[index]
@@ -25,15 +25,53 @@ const handlerFunctions = {
         nativity.owner = owner ?? nativity
 
         nativity.addImg = addImg ?? nativity
+
         
         res.send(nativity)
     },
-    addNat: (req,res) => {
-        
-    },
     deleteNat: (req,res) => {
-        
+        const {id} = req.params
+
+        let filteredNativities = NAT_DATA.filter((ele) => ele.id !== +id)
+
+        NAT_DATA = filteredNativities
+
+        res.send('Item deleted')
     },
+    addNat: (req,res) => {
+        const newObj = {
+            id: globalId,
+            // img,
+            // origin,
+        }
+        NAT_DATA.push(newObj)
+
+        globalId++
+        console.log(newObj)
+        res.send(newObj)
+    },
+
+    imageAndOrigin: (req,res) => {
+        const {id} = req.params
+        const {img,origin} = req.body
+
+        const index = NAT_DATA.findIndex(ele => ele.id === +id)
+        const nativity = NAT_DATA[index]
+
+        nativity.img = img ?? nativity
+
+        nativity.origin = origin ?? nativity
+
+        // if (NAT_DATA(id).img === '') {
+        //     NAT_DATA(id).img = img
+        // }
+
+        // if (NAT_DATA(id).origin === ''){
+        //     NAT_DATA(id).origin = origin
+        // }
+
+        res.send(nativity)
+    }
 
 }
 

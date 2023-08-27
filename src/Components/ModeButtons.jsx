@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ModeButtons = ({isEditing,editClick,saveClick,onDeleteClick}) => {
-  console.log(isEditing)
+  // console.log(isEditing)
   return isEditing ? (
     <td>
         <button  onClick={saveClick}>Save</button>
