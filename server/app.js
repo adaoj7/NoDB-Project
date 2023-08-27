@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.use(express.json())
 
 
-const {natList,addNat,editNat,deleteNat,imageAndOrigin} = handlerFunctions
+const {natList,addNat,editNat,deleteNat,imageAdd,originAdd} = handlerFunctions
 
 app.get('/natList',natList)
 
@@ -21,6 +21,8 @@ app.delete('/deleteNat/:id', deleteNat)
 
 app.post('/addNat', addNat)
 
-app.put('/imgAndOrigin/:id', imageAndOrigin)
+app.put('/imgAdd/:id', imageAdd)
+
+app.put('/originAdd/:id', originAdd)
 
 ViteExpress.listen(app,4242,() => console.log('what is the answer? http://localhost:4242'))

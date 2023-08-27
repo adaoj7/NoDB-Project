@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
+import axios from 'axios'
 
-const InitialOrigin = ({onClick,value}) => {
+let globalId = 5
+const InitialOrigin = ({onClick,value,alsoClick,id}) => {
+  // console.log(id)
   const [val,setValue] = useState(value)
   const [savedVal,setSavedVal] = useState(val)
   const handleSubmit = (event) => {
@@ -11,15 +14,35 @@ const InitialOrigin = ({onClick,value}) => {
     setSavedVal(val)
     
   }
-  
+
+  const originAdd = async () => {
+    console.log('this ran')
+
+    let bodyObj = {
+        origin:val
+    }
+    const {data} = await axios.put(`originAdd/${id}`,bodyObj)
+    if(!data.error){
+
+    } else (
+      console.log('oops')
+    )
+
+  }
+
+  let allInOne = ()=>{
+  onClick = ()=>val
+  originAdd()
+  // console.log('this ran')
+  }
   return savedVal ? (
-    <tr>{savedVal}</tr>
+    <>{savedVal}</>
 ) : (
     <form onSubmit={handleSubmit}>
       <input type='text' 
       onChange={(e) => setValue(e.target.value)}
       />
-      <button onClick={onClick=()=>val}>Submit</button>
+      <button onClick={allInOne}>Submit</button>
     </form>
 )
 }

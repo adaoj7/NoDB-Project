@@ -19,8 +19,8 @@ export const NatListTable = ({ initialNativityList }) => {
 
         const newNativityList = {...data}
         setCurrentList([...currentList,newNativityList])
-        console.log(data)
-        console.log(initialNativityList)
+        // console.log(data)
+        // console.log(initialNativityList)
     }
     
     const deleteRow = async (id) => {

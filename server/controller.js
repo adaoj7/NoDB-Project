@@ -39,10 +39,13 @@ const handlerFunctions = {
         res.send('Item deleted')
     },
     addNat: (req,res) => {
+        const {img,origin,owner,addImg} = req.body
         const newObj = {
             id: globalId,
-            // img,
-            // origin,
+            img:'',
+            origin:'',
+            owner:'',
+            addImg:''
         }
         NAT_DATA.push(newObj)
 
@@ -51,7 +54,7 @@ const handlerFunctions = {
         res.send(newObj)
     },
 
-    imageAndOrigin: (req,res) => {
+    imageAdd: (req,res) => {
         const {id} = req.params
         const {img,origin} = req.body
 
@@ -60,15 +63,17 @@ const handlerFunctions = {
 
         nativity.img = img ?? nativity
 
+        res.send(nativity)
+    },
+    originAdd: (req,res) => {
+        const {id} = req.params
+        const {img,origin} = req.body
+        console.log(req.body)
+
+        const index = NAT_DATA.findIndex(ele => ele.id === +id)
+        const nativity = NAT_DATA[index]
+
         nativity.origin = origin ?? nativity
-
-        // if (NAT_DATA(id).img === '') {
-        //     NAT_DATA(id).img = img
-        // }
-
-        // if (NAT_DATA(id).origin === ''){
-        //     NAT_DATA(id).origin = origin
-        // }
 
         res.send(nativity)
     }

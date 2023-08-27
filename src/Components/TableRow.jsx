@@ -10,11 +10,11 @@ import './TableRow.css'
 
 export const TableRow = ({initialIsEditing,natInfo,id,deleteFunction}) => {
     const [editMode,setEditMode] = useState(initialIsEditing)
-    const [img,setImg] = useState(natInfo.img)
-    const [origin,setOrigin] = useState(natInfo.origin)
+    const img= natInfo.img
+    const origin = natInfo.origin
     const [owner,setOwner] = useState(natInfo.owner)
     const [addImg, setAddImg] = useState(natInfo.addImg)
-    
+    // console.log(id)
 
     const changeEditMode = () => setEditMode(true)
     const changeNormalMode = async () => {
@@ -32,20 +32,6 @@ export const TableRow = ({initialIsEditing,natInfo,id,deleteFunction}) => {
         }
     }
 
-    const imgAndOrigin = async () => {
-        let bodyObj = {
-            img,
-            origin
-        }
-        const {data} = await axios.put(`imgAndOrigin/$`,bodyObj)
-        if(!data.error){
-
-        }
-
-    }
-
-    // console.log(origin)
-
   return (
     <tr>
         <ModeButtons
@@ -54,20 +40,20 @@ export const TableRow = ({initialIsEditing,natInfo,id,deleteFunction}) => {
         saveClick={changeNormalMode}
         onDeleteClick={deleteFunction}
         />
-        {/* <td>{img}</td>
-        <td>{origin}</td>
-        <td>{owner}</td>
-        <td>{addImg}</td> */}
+      
         <td>
             <InitialImage
             value={img}
-            onClick={setImg}
+            id={id}
+            
+        
             />
         </td>
         <td>
             <InitialOrigin
             value={origin}
-            onClick={setOrigin}
+            id={id}
+           
             />
         </td>
         <Owner
@@ -80,6 +66,6 @@ export const TableRow = ({initialIsEditing,natInfo,id,deleteFunction}) => {
             isEditing={editMode}
             onValueChange={setAddImg}
         />
-        </tr>
+    </tr>
   )
 }
